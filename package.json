@@ -8,6 +8,10 @@
     "start": "webpack-dev-server --progress -p --color",
     "build": "webpack --config webpack.prod.js --progress -p --color"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhaozhuoboy/react-template.git"
+  },
   "author": "zhaozhuo",
   "license": "ISC",
   "devDependencies": {
