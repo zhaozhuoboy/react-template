@@ -81,10 +81,10 @@ module.exports = {
     resolve:{
         extensions: ['.js', '.jsx', '.json', '.less', '.css'],
         alias: {
-            'src': path.resolve(__dirname, '../src'),
-            'components': path.resolve(__dirname, '../src/components'),
-            'page': path.resolve(__dirname, '../src/page'),
-            'utils': path.resolve(__dirname, '../src/utils')
+            'src': path.resolve(__dirname, './src'),
+            'components': path.resolve(__dirname, './src/app/components'),
+            'page': path.resolve(__dirname, './src/app/page'),
+            'util': path.resolve(__dirname, './src/util')
         }
     },//配置解析规则
 }
