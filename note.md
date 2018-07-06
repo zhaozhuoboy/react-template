@@ -100,3 +100,22 @@ module.exports = {
 npm i copy-webpack-plugin -D
 ```
 
+## 安装babel 用来编译es6语法 和 JSX 语法 支持使用最新的语法
+
+```
+npm install --save-dev babel-loader babel-core babel-preset-env babel-preset-stage-0 babel-preset-react babel-preset-es2015
+```
+
+创建 .babelrc 文件配置babel转换规则
+
+```json
+{
+    "presets": [
+        "env",
+        "react",
+        "es2015",
+        "stage-0"
+    ]
+}
+```
+

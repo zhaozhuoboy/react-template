@@ -20,6 +20,7 @@ module.exports = {
     },
     module:{
         rules: [
+            { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader" },
             {
                 test: /\.css$/,
                 use: ExtractTextWebpackPlugin.extract({
@@ -48,6 +49,12 @@ module.exports = {
                         }
                     ]
                 })
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg|ico)$/,
+                use: [{
+                    loader: 'file-loader?name=images/img_[hash:8].[ext]'
+                }]
             }
         ]
     },//模块配置
@@ -70,9 +77,9 @@ module.exports = {
                 // collapseWhitespace:true,//删除空白行
             }
         }),
-        new PurifyCssWebpack({
-            paths: glob.sync(path.join(__dirname, 'src/*.html'))
-        })
+        // new PurifyCssWebpack({
+        //     paths: glob.sync(path.join(__dirname, 'src/*.html'))
+        // })
     ],
     mode:"production",
     resolve:{},//配置解析规则

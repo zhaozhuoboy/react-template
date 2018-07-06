@@ -5,6 +5,10 @@ let webpack = require('webpack');
 
 module.exports = {
     // entry:"./src/index.js",//入口
+    devtool: "cheap-source-map",
+    performance: {
+        hints: false, // 性能提示[warning,error,false],
+    },
     entry:{
         index:"./src/index.js",
     },
@@ -19,9 +23,18 @@ module.exports = {
         compress:true,//服务器压缩
         open:true,//自动打开浏览器
         hot: true,//开启热更新 要配置webpack自带的热更新插件 webpack.HotModuleReplacementPlugin
+        proxy: {
+            '/api': 'http://localhost:4000'
+        }
     },
     module: {//loader处理//模块配置
         rules:[
+            { 
+                test: /\.jsx?$/, 
+                exclude: /node_modules/, 
+                include: path.resolve(__dirname, 'src'),  
+                loader: "babel-loader" 
+            },
             {
                 test: /\.css$/,
                 use: [
@@ -46,6 +59,12 @@ module.exports = {
                         loader: "less-loader"
                     }
                 ]
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg|ico)$/,
+                use: [{
+                    loader: 'file-loader?name=images/img_[hash:8].[ext]'
+                }]
             }
         ]
     },
@@ -59,5 +78,13 @@ module.exports = {
         })
     ],
     mode:"development",
-    resolve:{},//配置解析规则
+    resolve:{
+        extensions: ['.js', '.jsx', '.json', '.less', '.css'],
+        alias: {
+            'src': path.resolve(__dirname, '../src'),
+            'components': path.resolve(__dirname, '../src/components'),
+            'page': path.resolve(__dirname, '../src/page'),
+            'utils': path.resolve(__dirname, '../src/utils')
+        }
+    },//配置解析规则
 }
