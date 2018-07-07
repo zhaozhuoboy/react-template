@@ -9,36 +9,34 @@ module.exports = {
     performance: {
         hints: false, // 性能提示[warning,error,false],
     },
-    entry:{
-        index:"./src/index.js",
+    entry: {
+        index: "./src/index.js",
     },
-    output:{
-        filename:"[name].[hash:8].js",//打包文件加8位哈希值清缓存
+    output: {
+        filename: "[name].[hash:8].js", //打包文件加8位哈希值清缓存
         //导出路径必须是绝对路径
-        path:path.resolve('./build')
-    },//出口
-    devServer:{
-        contentBase:"./build",
-        port:3000,
-        compress:true,//服务器压缩
-        open:true,//自动打开浏览器
-        hot: true,//开启热更新 要配置webpack自带的热更新插件 webpack.HotModuleReplacementPlugin
+        path: path.resolve('./build')
+    }, //出口
+    devServer: {
+        contentBase: "./build",
+        port: 3000,
+        compress: true, //服务器压缩
+        open: true, //自动打开浏览器
+        hot: true, //开启热更新 要配置webpack自带的热更新插件 webpack.HotModuleReplacementPlugin
         proxy: {
             '/api': 'http://localhost:4000'
         }
     },
-    module: {//loader处理//模块配置
-        rules:[
-            { 
-                test: /\.jsx?$/, 
-                exclude: /node_modules/, 
-                include: path.resolve(__dirname, 'src'),  
-                loader: "babel-loader" 
+    module: { //loader处理//模块配置
+        rules: [{
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                include: path.resolve(__dirname, 'src'),
+                loader: "babel-loader"
             },
             {
                 test: /\.css$/,
-                use: [
-                    {
+                use: [{
                         loader: "style-loader"
                     },
                     {
@@ -48,8 +46,7 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: [
-                    {
+                use: [{
                         loader: "style-loader"
                     },
                     {
@@ -68,17 +65,17 @@ module.exports = {
             }
         ]
     },
-    plugins: [//插件配置
+    plugins: [ //插件配置
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            filename:"index.html",
-            template:"./src/index.html",
-            title:"react+webpack4",
-            hash:true
+            filename: "index.html",
+            template: "./src/index.html",
+            title: "react+webpack4",
+            hash: true
         })
     ],
-    mode:"development",
-    resolve:{
+    mode: "development",
+    resolve: {
         extensions: ['.js', '.jsx', '.json', '.less', '.css'],
         alias: {
             'src': path.resolve(__dirname, './src'),
@@ -86,5 +83,5 @@ module.exports = {
             'page': path.resolve(__dirname, './src/app/page'),
             'util': path.resolve(__dirname, './src/util')
         }
-    },//配置解析规则
+    }, //配置解析规则
 }
