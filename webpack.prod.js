@@ -94,17 +94,6 @@ module.exports = {
         // })
     ],
     mode:"production",
-<<<<<<< HEAD
-    resolve: {
-        extensions: ['.js', '.jsx', '.json', '.less', '.css'],
-        alias: {
-            'src': path.resolve(__dirname, '../src'),
-            'components': path.resolve(__dirname, '../src/components'),
-            'page': path.resolve(__dirname, '../src/page'),
-            'utils': path.resolve(__dirname, '../src/utils')
-        }
-    }
-=======
     resolve:{
         extensions: ['.js', '.jsx', '.json', '.less', '.css'],
         alias: {
@@ -114,5 +103,4 @@ module.exports = {
             'util': path.resolve(__dirname, './src/util')
         }
     }//配置解析规则
->>>>>>> 5cecde49af3995c4fd5a6bac7310b3423bd37db3
 }
