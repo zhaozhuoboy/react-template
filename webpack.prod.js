@@ -7,6 +7,7 @@ let ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 let PurifyCssWebpack = require('purifycss-webpack');//必须放在HtmlWebpackPlugin插件后边用
 let glob = require('glob');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
+let HappyPack = require('happypack');
 
 module.exports = {
     // entry:"./src/index.js",//入口
@@ -20,7 +21,7 @@ module.exports = {
     },
     module:{
         rules: [
-            { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader" },
+            { test: /\.jsx?$/, exclude: /node_modules/, use:'happypack/loader'},
             {
                 test: /\.css$/,
                 use: ExtractTextWebpackPlugin.extract({
@@ -59,6 +60,9 @@ module.exports = {
         ]
     },//模块配置
     plugins: [//插件配置
+        new HappyPack({
+            loaders: ['babel-loader']
+        }),
         new ExtractTextWebpackPlugin('css/index.css'),
         new CopyWebpackPlugin([
             {
@@ -82,5 +86,13 @@ module.exports = {
         // })
     ],
     mode:"production",
-    resolve:{},//配置解析规则
+    resolve: {
+        extensions: ['.js', '.jsx', '.json', '.less', '.css'],
+        alias: {
+            'src': path.resolve(__dirname, '../src'),
+            'components': path.resolve(__dirname, '../src/components'),
+            'page': path.resolve(__dirname, '../src/page'),
+            'utils': path.resolve(__dirname, '../src/utils')
+        }
+    }
 }

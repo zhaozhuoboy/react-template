@@ -86,5 +86,5 @@ module.exports = {
             'page': path.resolve(__dirname, '../src/page'),
             'utils': path.resolve(__dirname, '../src/utils')
         }
-    },//配置解析规则
+    }//配置解析规则
 }
