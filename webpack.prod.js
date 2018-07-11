@@ -15,9 +15,17 @@ module.exports = {
         index:"./src/index.js",
     },
     output:{
-        filename:"[name].[hash:8].js",//打包文件加8位哈希值清缓存
+        filename:"js/[name].[hash:8].js",//打包文件加8位哈希值清缓存
         //导出路径必须是绝对路径
-        path:path.resolve('./build')
+        path:path.resolve('./build'),
+        chunkFilename:'chunk/[name].[chunkhash:8].js',
+        publicPath: './',
+    },
+    optimization: {
+        splitChunks: {
+          // include all types of chunks
+          chunks: 'async'
+        }
     },
     module:{
         rules: [
@@ -86,6 +94,7 @@ module.exports = {
         // })
     ],
     mode:"production",
+<<<<<<< HEAD
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.less', '.css'],
         alias: {
@@ -95,4 +104,15 @@ module.exports = {
             'utils': path.resolve(__dirname, '../src/utils')
         }
     }
+=======
+    resolve:{
+        extensions: ['.js', '.jsx', '.json', '.less', '.css'],
+        alias: {
+            'src': path.resolve(__dirname, './src'),
+            'components': path.resolve(__dirname, './src/app/components'),
+            'page': path.resolve(__dirname, './src/app/page'),
+            'util': path.resolve(__dirname, './src/util')
+        }
+    }//配置解析规则
+>>>>>>> 5cecde49af3995c4fd5a6bac7310b3423bd37db3
 }
