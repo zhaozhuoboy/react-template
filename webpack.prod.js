@@ -8,6 +8,7 @@ let PurifyCssWebpack = require('purifycss-webpack');//必须放在HtmlWebpackPlu
 let glob = require('glob');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let HappyPack = require('happypack');
+let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     // entry:"./src/index.js",//入口
@@ -29,7 +30,7 @@ module.exports = {
     },
     module:{
         rules: [
-            { test: /\.jsx?$/, exclude: /node_modules/, use:'happypack/loader'},
+            { test: /\.jsx?$/, exclude: /node_modules/, use:'babel-loader'},
             {
                 test: /\.css$/,
                 use: ExtractTextWebpackPlugin.extract({
@@ -68,9 +69,9 @@ module.exports = {
         ]
     },//模块配置
     plugins: [//插件配置
-        new HappyPack({
-            loaders: ['babel-loader']
-        }),
+        // new HappyPack({
+        //     loaders: ['babel-loader']
+        // }),
         new ExtractTextWebpackPlugin('css/index.css'),
         new CopyWebpackPlugin([
             {
@@ -89,6 +90,7 @@ module.exports = {
                 // collapseWhitespace:true,//删除空白行
             }
         }),
+        new BundleAnalyzerPlugin()
         // new PurifyCssWebpack({
         //     paths: glob.sync(path.join(__dirname, 'src/*.html'))
         // })
