@@ -2,6 +2,7 @@
 let path = require('path');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let webpack = require('webpack');
+let config = require('./config')
 
 module.exports = {
     // entry:"./src/index.js",//入口
@@ -10,16 +11,19 @@ module.exports = {
         hints: false, // 性能提示[warning,error,false],
     },
     entry: {
-        index: "./src/index.js",
+        index: [`webpack-dev-server/client?http://localhost:${config.port}/`,"./src/index.js"]
     },
     output: {
         filename: "[name].[hash:8].js", //打包文件加8位哈希值清缓存
         //导出路径必须是绝对路径
-        path: path.resolve('./build')
+        path: path.resolve('./build'),
+        publicPath:'/'
     }, //出口
     devServer: {
         contentBase: "./build",
-        port: 3000,
+        publicPath:'/',
+        port: config.port,
+        inline:true,
         compress: true, //服务器压缩
         open: true, //自动打开浏览器
         hot: true, //开启热更新 要配置webpack自带的热更新插件 webpack.HotModuleReplacementPlugin
@@ -67,6 +71,7 @@ module.exports = {
     },
     plugins: [ //插件配置
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({
             filename: "index.html",
             template: "./src/index.html",

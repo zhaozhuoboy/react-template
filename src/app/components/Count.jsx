@@ -5,7 +5,7 @@ export default class Count extends React.Component {
 			color: "blue",
 		}
 		return (
-			<div>count1</div>
+			<div>Counter1</div>
 		)
 	}
 }
