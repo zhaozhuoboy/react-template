@@ -12,6 +12,8 @@ module.exports = {
     entry: {
         index: [
             "webpack-dev-server/client?http://localhost:3000/",
+            'webpack/hot/only-dev-server',
+            "react-hot-loader/patch",
             "./src/index.js"
         ]
     },
@@ -38,7 +40,7 @@ module.exports = {
             test: /\.jsx?$/,
             exclude: /node_modules/,
             include: path.resolve(__dirname, './src'),
-            loader: "babel-loader"
+            loader: ["react-hot-loader/webpack","babel-loader"]
         },
         {
             test: /\.css$/,
