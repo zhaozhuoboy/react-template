@@ -79,6 +79,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: "index.html",
             template: "./src/index.html",
+            favicon: "./src/favicon.ico",
             title: "react+webpack4",
             hash: true
         })

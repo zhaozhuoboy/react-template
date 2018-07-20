@@ -84,6 +84,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template:"./src/index.html",
             title:"react+webpack4",
+            favicon: "./src/favicon.ico",
             hash:true,
             minify:{//上限压缩配置
                 removeAttributeQuotes:true,//删除属性的双引号
