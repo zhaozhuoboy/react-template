@@ -5,7 +5,7 @@ export default class Home extends React.Component{
     render(){
         return (
             <div>
-                <header style={styles.header}></header>
+                <header style={styles.header}>Hello React</header>
                 <Count />
             </div>
         )
@@ -15,6 +15,8 @@ const styles={
     header:{
         width:"100%",
         height:60,
-        background:"#323232"
+        background:"#323232",
+        color:"#FFF",
+        lineHeight:"60px"
     }
 }

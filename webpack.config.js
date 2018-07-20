@@ -5,25 +5,27 @@ let webpack = require('webpack');
 let config = require('./config')
 
 module.exports = {
-    // entry:"./src/index.js",//入口
     devtool: "cheap-source-map",
     performance: {
         hints: false, // 性能提示[warning,error,false],
     },
     entry: {
-        index: [`webpack-dev-server/client?http://localhost:${config.port}/`,"./src/index.js"]
+        index: [
+            "webpack-dev-server/client?http://localhost:3000/",
+            "./src/index.js"
+        ]
     },
     output: {
         filename: "[name].[hash:8].js", //打包文件加8位哈希值清缓存
         //导出路径必须是绝对路径
         path: path.resolve('./build'),
-        publicPath:'/'
+        publicPath: ''
     }, //出口
     devServer: {
         contentBase: "./build",
-        publicPath:'/',
-        port: config.port,
-        inline:true,
+        publicPath: '',
+        port: 3000,
+        inline: true,
         compress: true, //服务器压缩
         open: true, //自动打开浏览器
         hot: true, //开启热更新 要配置webpack自带的热更新插件 webpack.HotModuleReplacementPlugin
@@ -33,40 +35,40 @@ module.exports = {
     },
     module: { //loader处理//模块配置
         rules: [{
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                include: path.resolve(__dirname, 'src'),
-                loader: "babel-loader"
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            include: path.resolve(__dirname, './src'),
+            loader: "babel-loader"
+        },
+        {
+            test: /\.css$/,
+            use: [{
+                loader: "style-loader"
             },
             {
-                test: /\.css$/,
-                use: [{
-                        loader: "style-loader"
-                    },
-                    {
-                        loader: "css-loader"
-                    }
-                ]
-            },
-            {
-                test: /\.less$/,
-                use: [{
-                        loader: "style-loader"
-                    },
-                    {
-                        loader: "css-loader"
-                    },
-                    {
-                        loader: "less-loader"
-                    }
-                ]
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg|ico)$/,
-                use: [{
-                    loader: 'file-loader?name=images/img_[hash:8].[ext]'
-                }]
+                loader: "css-loader"
             }
+            ]
+        },
+        {
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            },
+            {
+                loader: "css-loader"
+            },
+            {
+                loader: "less-loader"
+            }
+            ]
+        },
+        {
+            test: /\.(jpe?g|png|gif|svg|ico)$/,
+            use: [{
+                loader: 'file-loader?name=images/img_[hash:8].[ext]'
+            }]
+        }
         ]
     },
     plugins: [ //插件配置
